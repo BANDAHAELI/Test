@@ -43,7 +43,7 @@ app.get('/fun', (req, res) => {
       status: "success",
       code: 200,
       creator: "Sarkar-Bandaheali",
-      quote: randomFun
+      Fun: randomFun
     });
   } catch (error) {
     res.status(400).json({
