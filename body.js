@@ -34,6 +34,26 @@ app.get('/random-quote', (req, res) => {
     });
   }
 });
+const fun = JSON.parse(fs.readFileSync(path.join(__dirname, 'fun.json')));
+app.get('/fun', (req, res) => {
+  try {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    const randomFun = fun[randomIndex];
+    res.status(200).json({
+      status: "success",
+      code: 200,
+      creator: "Sarkar-Bandaheali",
+      quote: randomFun
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "error",
+      code: 400,
+      creator: "Sarkar-Bandaheali",
+      message: "An error occurred while fetching the quote."
+    });
+  }
+});
 
 // Server listening
 app.listen(PORT, () => {
