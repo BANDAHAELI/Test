@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Load quotes from the JSON file
-const quotes = JSON.parse(fs.readFileSync(path.join(__dirname, 'quotes>
+const quotes = JSON.parse(fs.readFileSync(path.join(__dirname, 'quotes.json')));
 
 // API Endpoint to fetch a random quote
 app.get('/random-quote', (req, res) => {
