@@ -55,7 +55,31 @@ app.get('/fun', (req, res) => {
     });
   }
 });
+// Route to handle YouTube search
+app.get("/api/yts", async (req, res) => {
+  try {
+    const query = req.query.q;
+    if (!query) {
+      return res.status(400).json({ error: "Please provide a search query" });
+    }
 
+    // Perform YouTube search using yt-search
+    const result = await ytSearch(query);
+
+    // Extract video details
+    const videos = result.videos.slice(0, 5).map((video) => ({
+      title: video.title,
+      url: video.url,
+      duration: video.timestamp,
+      views: video.views,
+    }));
+
+    res.json(videos);
+  } catch (error) {
+    res.status(500).json({ error: "Something went wrong" });
+  }
+});
+      
 // Server listening
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
